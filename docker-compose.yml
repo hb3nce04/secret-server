@@ -8,10 +8,21 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: root
-
+    nest_api:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - 3000:3000
+        depends_on:
+            - mongo
+        volumes:
+            - ./src:/usr/src/app/src
     mongo-express:
         image: mongo-express
         restart: always
+        depends_on:
+            - mongo
         ports:
             - 8080:8081
         environment:

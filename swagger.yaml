@@ -3,8 +3,8 @@ info:
     description: "This is an API of a secret service. You can save your secret by using the API. You can restrict the access of a secret after the certen number of views or after a certen period of time."
     version: "1.0.0"
     title: "Secret Server"
-host: "api.your-secret-server.com"
-basePath: "/v1"
+host: "localhost:4000"
+basePath: "/api"
 tags:
     - name: "secret"
       externalDocs:
@@ -23,8 +23,9 @@ paths:
             consumes:
                 - "application/x-www-form-urlencoded"
             produces:
-                - "application/json"
-                - "application/xml"
+                - application/json
+                - application/xml
+                - application/yaml
             parameters:
                 - in: "formData"
                   name: "secret"
@@ -59,8 +60,9 @@ paths:
             description: "Returns a single secret"
             operationId: "getSecretByHash"
             produces:
-                - "application/json"
-                - "application/xml"
+                - application/json
+                - application/xml
+                - application/yaml
             parameters:
                 - name: "hash"
                   in: "path"
