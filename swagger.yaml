@@ -3,7 +3,7 @@ info:
     description: "This is an API of a secret service. You can save your secret by using the API. You can restrict the access of a secret after the certen number of views or after a certen period of time."
     version: "1.0.0"
     title: "Secret Server"
-host: "https://secret-server-qtl7.onrender.com"
+host: secret-server-qtl7.onrender.com
 basePath: "/api"
 tags:
     - name: "secret"
@@ -21,6 +21,10 @@ paths:
             tags:
                 - "secret"
             summary: "Gets all secrets"
+            produces:
+                - application/json
+                - application/xml
+                - application/yaml
             responses:
                 200:
                     description: "list of secrets"
