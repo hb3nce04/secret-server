@@ -34,6 +34,12 @@ export class TransformInterceptor implements NestInterceptor {
 		return next.handle().pipe(
 			map((data) => {
 				if (acceptHeader === "application/xml") {
+					// xml array nesting (it encapsulates each element in the list)
+					if (data instanceof Array) {
+						data = data.map((item) => ({
+							element: item
+						}));
+					}
 					return new Builder().buildObject({ data });
 				} else if (acceptHeader === "application/yaml") {
 					return stringify(data);
