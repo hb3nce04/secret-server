@@ -21,9 +21,7 @@ import { AppController } from "./app.controller";
 			}
 		]),
 		MongooseModule.forRoot(process.env.MONGO_URL, {
-			dbName: process.env.MONGO_DB,
-			user: process.env.MONGO_USERNAME,
-			pass: process.env.MONGO_PASSWORD
+			dbName: process.env.MONGO_DB
 		}),
 		SecretModule
 	],

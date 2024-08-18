@@ -23,13 +23,8 @@ async function bootstrap() {
 			errorHttpStatusCode: HttpStatus.METHOD_NOT_ALLOWED
 		})
 	);
-	if (
-		configService.get("NODE_ENV").trim() === "development" ||
-		configService.get("NODE_ENV").trim() === "production"
-	) {
-		const document = readFileSync("./swagger.yaml", "utf8");
-		SwaggerModule.setup("docs", app, parse(document));
-	}
+	const document = readFileSync("./swagger.yaml", "utf8");
+	SwaggerModule.setup("docs", app, parse(document));
 	await app.listen(port);
 	logger.verbose(`The server is running on port: ${port}`);
 	logger.verbose(
