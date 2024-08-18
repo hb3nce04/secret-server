@@ -3,22 +3,35 @@ info:
     description: "This is an API of a secret service. You can save your secret by using the API. You can restrict the access of a secret after the certen number of views or after a certen period of time."
     version: "1.0.0"
     title: "Secret Server"
-host: "localhost:4000"
+host: "localhost:3000"
 basePath: "/api"
 tags:
     - name: "secret"
-      externalDocs:
-          description: "Find out more"
-          url: "http://swagger.io"
-schemes:
-    - "http"
 paths:
+    /health:
+        get:
+            tags:
+                - "health"
+            summary: "Runs a health check"
+            responses:
+                200:
+                    description: "server is active"
     /secret:
+        get:
+            tags:
+                - "secret"
+            summary: "Gets all secrets"
+            responses:
+                200:
+                    description: "list of secrets"
+                    schema:
+                        type: array
+                        items:
+                            $ref: "#/definitions/Secret"
         post:
             tags:
                 - "secret"
             summary: "Add a new secret"
-            description: ""
             operationId: "addSecret"
             consumes:
                 - "application/x-www-form-urlencoded"
@@ -100,6 +113,3 @@ definitions:
                 description: "How many times the secret can be viewed"
         xml:
             name: "Secret"
-externalDocs:
-    description: "Find out more about Swagger"
-    url: "http://swagger.io"

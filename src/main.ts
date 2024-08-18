@@ -3,7 +3,7 @@ import { AppModule } from "./app.module";
 import { readFileSync } from "fs";
 import { parse } from "yaml";
 import { SwaggerModule } from "@nestjs/swagger";
-import { HttpStatus, ValidationPipe } from "@nestjs/common";
+import { HttpStatus, Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import helmet from "helmet";
 import * as compression from "compression";
@@ -12,7 +12,8 @@ import { CustomExceptionFilter } from "./custom-exception.filter";
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get(ConfigService);
-	const port = configService.get("PORT");
+	const port = configService.get("PORT") || 3000;
+	const logger = new Logger("APP");
 	app.use(helmet());
 	app.use(compression());
 	app.useGlobalFilters(new CustomExceptionFilter());
@@ -22,10 +23,17 @@ async function bootstrap() {
 			errorHttpStatusCode: HttpStatus.METHOD_NOT_ALLOWED
 		})
 	);
-	if (configService.get("NODE_ENV").trim() === "development") {
+	if (
+		configService.get("NODE_ENV").trim() === "development" ||
+		configService.get("NODE_ENV").trim() === "production"
+	) {
 		const document = readFileSync("./swagger.yaml", "utf8");
 		SwaggerModule.setup("docs", app, parse(document));
 	}
-	await app.listen(port || 3000);
+	await app.listen(port);
+	logger.verbose(`The server is running on port: ${port}`);
+	logger.verbose(
+		`The server is running on environment: ${process.env.NODE_ENV}`
+	);
 }
 bootstrap();

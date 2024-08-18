@@ -28,6 +28,11 @@ export class SecretController {
 		return this.secretService.createSecret(createSecretDto);
 	}
 
+	@Get()
+	getSecrets() {
+		return this.secretService.getSecrets();
+	}
+
 	@Get(":hash")
 	getSecretByHash(@Param("hash") hash: string) {
 		return this.secretService.getSecretByHash(hash);

@@ -14,19 +14,14 @@ services:
             dockerfile: Dockerfile.dev
         ports:
             - 3000:3000
+        environment:
+            PORT: 3000
+            MONGO_URL: mongodb://mongo
+            MONGO_DB: secret
+            MONGO_USERNAME: root
+            MONGO_PASSWORD: root
+            SECRET_SALT: littlesalt
         depends_on:
             - mongo
         volumes:
-            - ./src:/usr/src/app/src
-    mongo-express:
-        image: mongo-express
-        restart: always
-        depends_on:
-            - mongo
-        ports:
-            - 8080:8081
-        environment:
-            ME_CONFIG_MONGODB_ADMINUSERNAME: root
-            ME_CONFIG_MONGODB_ADMINPASSWORD: root
-            ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
-            ME_CONFIG_BASICAUTH: false
+            - ./src:/app/src

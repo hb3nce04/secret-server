@@ -5,6 +5,7 @@ import { ConfigModule } from "@nestjs/config";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 import { TransformInterceptor } from "./interceptor/transform.interceptor";
+import { AppController } from "./app.controller";
 
 @Module({
 	imports: [
@@ -26,7 +27,7 @@ import { TransformInterceptor } from "./interceptor/transform.interceptor";
 		}),
 		SecretModule
 	],
-	controllers: [],
+	controllers: [AppController],
 	providers: [
 		{
 			provide: APP_GUARD,

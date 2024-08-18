@@ -25,6 +25,10 @@ export class SecretService {
 		return newSecret;
 	}
 
+	getSecrets() {
+		return this.secretModel.find();
+	}
+
 	async getSecretByHash(hash: string) {
 		const currentDate = new Date();
 		const foundSecret = await this.secretModel.findOneAndUpdate(
