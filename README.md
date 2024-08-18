@@ -1,7 +1,8 @@
 ## Description
 Solution for Secret Server Coding Task (built in NestJS) - deployment version</br>
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.</br>
-[Docker Desktop](https://www.docker.com/) used to automate the deployment of applications in lightweight containers.
+[Docker Desktop](https://www.docker.com/) used to automate the deployment of applications in lightweight containers.</br>
+Available Swagger documentation at /docs.
 
 ## Running within the container
 
