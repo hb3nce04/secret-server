@@ -17,6 +17,7 @@ export class SecretService {
 			secretText,
 			hash,
 			remainingViews: createSecretDto.expireAfterViews,
+			createdAt: currentDate,
 			expiresAt: new Date(
 				currentDate.getTime() + createSecretDto.expireAfter * 60 * 1000
 			)
@@ -33,9 +34,18 @@ export class SecretService {
 		const currentDate = new Date();
 		const foundSecret = await this.secretModel.findOneAndUpdate(
 			{
-				hash,
-				expiresAt: { $gt: currentDate },
-				remainingViews: { $gt: 0 }
+				$and: [
+					{
+						hash,
+						remainingViews: { $gt: 0 }
+					},
+					{
+						$or: [
+							{ expiresAt: { $gt: currentDate } },
+							{ $expr: { $eq: ["$expiresAt", "$createdAt"] } }
+						]
+					}
+				]
 			},
 			{ $inc: { remainingViews: -1 } },
 			{ new: true }
