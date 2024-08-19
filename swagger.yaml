@@ -83,7 +83,7 @@ paths:
             parameters:
                 - name: "hash"
                   in: "path"
-                  description: "Unique hash to identify the secret"
+                  description: "Unique hash to identify the secret - in encoded form (NestJS does the decoding automatically)"
                   required: true
                   type: "string"
             responses:
