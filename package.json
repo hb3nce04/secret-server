@@ -1,6 +1,7 @@
 {
 	"name": "secret-server",
 	"version": "1.0.0",
+	"type": "commonjs",
 	"description": "This is a solution for a coding task for job candidates.",
 	"author": "hb3nce04",
 	"private": true,
