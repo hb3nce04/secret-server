@@ -15,7 +15,7 @@ async function bootstrap() {
 	const port = configService.get("PORT") || 3000;
 	const logger = new Logger("APP");
 	app.use(helmet());
-	app.use(compression());
+	//app.use(compression());
 	app.useGlobalFilters(new CustomExceptionFilter());
 	app.setGlobalPrefix("api");
 	app.useGlobalPipes(
